@@ -1,0 +1,56 @@
+package ru.kolesnikov.storemanagement.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.Instant;
+import java.util.List;
+
+@Entity
+@Table(name = "receipt")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public class Receipt {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "number")
+    private String number;
+
+    @Column(name = "date")
+    private Instant date;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "legal_entity_id")
+//    @Column(name = "supplies")
+    private LegalEntity supplies;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "receipt", cascade = CascadeType.ALL)
+//    @Column(name = "total")
+    private List<ReceiptDetail> total;
+
+    private String details;
+
+
+    public Receipt(String number,
+                   Instant date,
+                   Stock stock,
+                   LegalEntity supplies,
+                   String details) {
+        this.number = number;
+        this.date = date;
+        this.stock = stock;
+        this.supplies = supplies;
+        this.details = details;
+    }
+
+}
