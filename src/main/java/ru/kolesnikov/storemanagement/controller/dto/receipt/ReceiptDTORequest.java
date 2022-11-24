@@ -1,4 +1,6 @@
 package ru.kolesnikov.storemanagement.controller.dto.receipt;
 
-public record ReceiptDTORequest(String number, String details) {
+import javax.validation.constraints.NotBlank;
+
+public record ReceiptDTORequest(@NotBlank String number, String details) {
 }

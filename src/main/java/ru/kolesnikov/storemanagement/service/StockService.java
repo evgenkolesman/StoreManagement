@@ -14,7 +14,6 @@ public class StockService {
 
     private final StockRepository stockRepository;
 
-
     public List<Stock> getStocks() {
         return stockRepository.findAll();
     }

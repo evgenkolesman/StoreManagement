@@ -9,11 +9,11 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "receipt_details")
+@Table(name = "shipment_details")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ReceiptDetail {
+public class ShipmentDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,38 +25,39 @@ public class ReceiptDetail {
     @Column(name = "price", length = 14, scale = 1)
     private BigDecimal price;
 
-    @Formula("quantity * price ")
+    @Formula("quantity * price")
     private BigDecimal sum;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "receipt_id")
-    private Receipt receipt;
+    @JoinColumn(name = "shipment_id")
+    private Shipment shipment;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "items_id")
     private Items items;
 
-    public ReceiptDetail(BigDecimal quantity,
-                         BigDecimal price,
-                         Receipt receipt,
-                         Items items) {
+    public ShipmentDetail(Shipment shipment,
+                          BigDecimal quantity,
+                          BigDecimal price,
+                          Items items) {
         this.quantity = quantity;
         this.price = price;
-        this.receipt = receipt;
+        this.shipment = shipment;
         this.items = items;
     }
 
 
-    public ReceiptDetail(Long id,
-                         BigDecimal quantity,
-                         BigDecimal price,
-                         Receipt receipt,
-                         Items items) {
+    public ShipmentDetail(Long id,
+                          Shipment shipment,
+                          BigDecimal quantity,
+                          BigDecimal price,
+                          Items items) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
 //        this.sum = price.multiply(quantity);
-        this.receipt = receipt;
+        this.shipment = shipment;
         this.items = items;
     }
+
 }

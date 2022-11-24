@@ -33,19 +33,19 @@ public class ItemController {
     }
 
     @PostMapping("/api/v1/items")
-    public ItemDTOResponse addStock(@RequestBody
-                                    @NonNull ItemDTORequest itemDTORequest) {
-        Items item = itemService.addItem(new Items(itemDTORequest.itemName(),
+    public ItemDTOResponse addItem(@RequestBody
+                                   @NonNull ItemDTORequest itemDTORequest) {
+        Items item = itemService.addItem(new Items(itemDTORequest.name(),
                 itemDTORequest.barcode(), itemDTORequest.price()));
         return new ItemDTOResponse(item.getId(), item.getItemName(), item.getBarcode(), item.getPrice());
     }
 
     @PutMapping("/api/v1/items/{itemId}")
-    public ItemDTOResponse updateStock(@PathVariable("itemId") Long itemId,
-                                       @RequestBody
-                                       @NonNull ItemDTORequest itemDTORequest) {
+    public ItemDTOResponse updateItem(@PathVariable("itemId") Long itemId,
+                                      @RequestBody
+                                      @NonNull ItemDTORequest itemDTORequest) {
         Items item = itemService.updateItem(itemId, new Items(itemId,
-                itemDTORequest.itemName(),
+                itemDTORequest.name(),
                 itemDTORequest.barcode(),
                 itemDTORequest.price()));
         return new ItemDTOResponse(item.getId(), item.getItemName(), item.getBarcode(), item.getPrice());
@@ -54,7 +54,7 @@ public class ItemController {
 
     @DeleteMapping("/api/v1/items/{itemId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteStock(@PathVariable("itemId") Long itemId) {
+    public void deleteItem(@PathVariable("itemId") Long itemId) {
         itemService.deleteItem(itemId);
     }
 

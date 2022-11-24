@@ -21,7 +21,7 @@ public class Items {
     @Column(name = "item_name", length = 100, nullable = false)
     private String itemName;
 
-    @Column(name = "barcode", nullable = false, unique = true)
+    @Column(name = "barcode", length = 13, nullable = false, unique = true)
     private String barcode;
 
     @Column(name = "price", nullable = false, scale = 1)

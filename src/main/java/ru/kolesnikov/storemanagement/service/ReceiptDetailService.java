@@ -9,6 +9,7 @@ import ru.kolesnikov.storemanagement.model.ReceiptDetail;
 import ru.kolesnikov.storemanagement.repository.ReceiptDetailRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +53,9 @@ public class ReceiptDetailService {
                 receipt,
                 items
         ));
+    }
+
+    public List<ReceiptDetail> getReceiptDetailsByReceiptID(Long receiptId) {
+        return receiptDetailRepository.getReceiptDetailsByReceiptId(receiptId);
     }
 }
