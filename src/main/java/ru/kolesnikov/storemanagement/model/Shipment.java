@@ -9,11 +9,11 @@ import java.time.Instant;
 import java.util.List;
 
 @Entity
-@Table(name = "receipt")
+@Table(name = "shipment")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class Receipt {
+public class Shipment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,29 +33,18 @@ public class Receipt {
     @JoinColumn(name = "legal_entity_id")
     private LegalEntity supplies;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "receipt", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shipment", cascade = CascadeType.ALL)
     //TODO make this calculations
-    private List<ReceiptDetail> receiptDetails;
-
-//    @Column(name = "total")
-//    @Formula("select sum (price * quantity) from receipt_details")
-//    private BigDecimal total;
-//    {
-//        if(!getReceiptDetails().isEmpty()) {
-//            getReceiptDetails().stream()
-//                    .map(ReceiptDetail::getSum)
-//                    .reduce(BigDecimal.ZERO, BigDecimal::add);
-//        }
-//    }
+    private List<ShipmentDetail> shipmentDetails;
 
     private String details;
 
 
-    public Receipt(String number,
-                   Instant date,
-                   Stock stock,
-                   LegalEntity supplies,
-                   String details) {
+    public Shipment(String number,
+                    Instant date,
+                    Stock stock,
+                    LegalEntity supplies,
+                    String details) {
         this.number = number;
         this.date = date;
         this.stock = stock;
@@ -63,13 +52,13 @@ public class Receipt {
         this.details = details;
     }
 
-    public Receipt(Long receiptId,
-                   String number,
-                   Instant date,
-                   Stock stock,
-                   LegalEntity supplies,
-                   String details) {
-        this.id = receiptId;
+    public Shipment(Long id,
+                    String number,
+                    Instant date,
+                    Stock stock,
+                    LegalEntity supplies,
+                    String details) {
+        this.id = id;
         this.number = number;
         this.date = date;
         this.stock = stock;
