@@ -2,6 +2,7 @@ package ru.kolesnikov.storemanagement.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.kolesnikov.storemanagement.exceptions.NotEnoughBalanceException;
 import ru.kolesnikov.storemanagement.exceptions.NotFoundShipmentDetailsException;
 import ru.kolesnikov.storemanagement.model.Items;
 import ru.kolesnikov.storemanagement.model.Shipment;
@@ -9,6 +10,7 @@ import ru.kolesnikov.storemanagement.model.ShipmentDetail;
 import ru.kolesnikov.storemanagement.repository.ShipmentDetailRepository;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
@@ -19,14 +21,17 @@ public class ShipmentDetailService {
     private final ItemService itemService;
 
     public ShipmentDetail addShipmentDetails(Shipment shipment,
-                                             BigDecimal quantity,
+                                             BigInteger quantity,
                                              BigDecimal price,
                                              String barcode) {
 
 
         AtomicReference<Items> items = new AtomicReference<>(itemService.getItemByBarcode(barcode));
+        if(items.get().getBalance().subtract(quantity).isProbablePrime(0)) {
+            throw new NotEnoughBalanceException();
+        }
         items.updateAndGet(i -> {
-            i.setBalance(items.get().getBalance() + 1);
+            i.setBalance(items.get().getBalance().subtract(quantity));
             return i;
         });
 

@@ -9,6 +9,7 @@ import ru.kolesnikov.storemanagement.model.ReceiptDetail;
 import ru.kolesnikov.storemanagement.repository.ReceiptDetailRepository;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -19,12 +20,12 @@ public class ReceiptDetailService {
     private final ItemService itemService;
 
     public ReceiptDetail addReceiptDetails(Receipt receipt,
-                                           BigDecimal quantity,
+                                           BigInteger quantity,
                                            BigDecimal price,
                                            String barcode) {
         AtomicReference<Items> items = new AtomicReference<>(itemService.getItemByBarcode(barcode));
         items.updateAndGet(i -> {
-            i.setBalance(items.get().getBalance() + 1);
+            i.setBalance(items.get().getBalance().add(quantity));
             return i;
         });
 
@@ -48,7 +49,7 @@ public class ReceiptDetailService {
 
     public ReceiptDetail updateReceiptDetails(Receipt receipt,
                                               Long detailsId,
-                                              BigDecimal quantity,
+                                              BigInteger quantity,
                                               BigDecimal price,
                                               String barcode) {
 

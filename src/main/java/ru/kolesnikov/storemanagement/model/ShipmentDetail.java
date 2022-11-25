@@ -7,6 +7,7 @@ import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 @Entity
 @Table(name = "shipment_details")
@@ -20,7 +21,7 @@ public class ShipmentDetail {
     private Long id;
 
     @Column(name = "quantity", length = 14, scale = 1)
-    private BigDecimal quantity;
+    private BigInteger quantity;
 
     @Column(name = "price", length = 14, scale = 1)
     private BigDecimal price;
@@ -37,7 +38,7 @@ public class ShipmentDetail {
     private Items items;
 
     public ShipmentDetail(Shipment shipment,
-                          BigDecimal quantity,
+                          BigInteger quantity,
                           BigDecimal price,
                           Items items) {
         this.quantity = quantity;
@@ -49,7 +50,7 @@ public class ShipmentDetail {
 
     public ShipmentDetail(Long id,
                           Shipment shipment,
-                          BigDecimal quantity,
+                          BigInteger quantity,
                           BigDecimal price,
                           Items items) {
         this.id = id;
