@@ -75,8 +75,7 @@ public class ShipmentController {
                                 shipmentDetail.getPrice(),
                                 shipmentDetail.getSum(),
                                 shipmentDetail.getItems().getItemName(),
-                                shipmentDetail.getItems().getBarcode()
-                        ))
+                                shipmentDetail.getItems().getBarcode()))
                         .collect(Collectors.toList()),
                 shipment.getShipmentDetails().stream()
                         .map(ShipmentDetail::getSum)

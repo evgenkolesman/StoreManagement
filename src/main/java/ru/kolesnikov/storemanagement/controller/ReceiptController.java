@@ -104,9 +104,8 @@ public class ReceiptController {
                                 receiptDetail.getPrice(),
                                 receiptDetail.getSum(),
                                 receiptDetail.getItems().getItemName(),
-                                receiptDetail.getItems().getBarcode()
-                        ))
-                        .collect(Collectors.toList()), //list
+                                receiptDetail.getItems().getBarcode()))
+                        .collect(Collectors.toList()),
                 receipt.getReceiptDetails().stream()
                         .map(ReceiptDetail::getSum)
                         .reduce(BigDecimal.ZERO, BigDecimal::add),
