@@ -27,7 +27,7 @@ public class ShipmentDetailService {
 
 
         AtomicReference<Items> items = new AtomicReference<>(itemService.getItemByBarcode(barcode));
-        if(items.get().getBalance().subtract(quantity).isProbablePrime(0)) {
+        if(!items.get().getBalance().subtract(quantity).isProbablePrime(0)) {
             throw new NotEnoughBalanceException();
         }
         items.updateAndGet(i -> {
