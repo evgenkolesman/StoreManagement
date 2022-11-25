@@ -1,4 +1,6 @@
 # Приложение StoreManagement
+[![Java CI with Maven](https://github.com/evgenkolesman/StoreManagement/actions/workflows/maven.yml/badge.svg)](https://github.com/evgenkolesman/StoreManagement/actions/workflows/maven.yml)
+
 
 Приложение управление складом, которое формирует приходные расходные накладные по моему замыслу отдача идет в формате JSON где
 далее на фронте или, возможно, в другой апишке перерабатывается в нужный формат
