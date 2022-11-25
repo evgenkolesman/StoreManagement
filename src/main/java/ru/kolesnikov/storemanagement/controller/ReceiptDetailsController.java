@@ -3,6 +3,7 @@ package ru.kolesnikov.storemanagement.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import ru.kolesnikov.storemanagement.controller.dto.receiptdetails.ReceiptDetailDTORequest;
 import ru.kolesnikov.storemanagement.controller.dto.receiptdetails.ReceiptDetailDTOResponse;
 import ru.kolesnikov.storemanagement.model.ReceiptDetail;
@@ -19,6 +20,7 @@ public class ReceiptDetailsController {
 
     private final ReceiptDetailService receiptDetailService;
     private final ReceiptService receiptService;
+    private final RestTemplate client;
 
     @PostMapping("/api/v1/stock/{stockId}/legalEntity/{entityId}/receipt/{receiptId}/details")
     public ReceiptDetailDTOResponse addReceiptDetail(@PathVariable("stockId") Long stockId,
