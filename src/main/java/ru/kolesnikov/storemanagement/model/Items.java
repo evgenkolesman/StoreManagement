@@ -3,6 +3,7 @@ package ru.kolesnikov.storemanagement.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -27,9 +28,14 @@ public class Items {
     @Column(name = "price", nullable = false, scale = 1)
     private BigDecimal price;
 
+    @Setter
+    @Column(name = "balance")
+    private int balance;
+
     public Items(String itemName, String barcode, BigDecimal price) {
         this.itemName = itemName;
         this.barcode = barcode;
         this.price = price;
+        this.balance = 0;
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.kolesnikov.storemanagement.controller.dto.shipmentdetails.ShipmentDetailDTORequest;
 import ru.kolesnikov.storemanagement.controller.dto.shipmentdetails.ShipmentDetailDTOResponse;
+import ru.kolesnikov.storemanagement.model.Items;
 import ru.kolesnikov.storemanagement.model.ShipmentDetail;
 import ru.kolesnikov.storemanagement.service.ItemService;
 import ru.kolesnikov.storemanagement.service.ShipmentDetailService;
@@ -25,11 +26,12 @@ public class ShipmentDetailsController {
                                                       @PathVariable("entityId") Long entityId,
                                                       @PathVariable("shipmentId") Long shipmentId,
                                                       @RequestBody ShipmentDetailDTORequest shipmentDTORequest) {
-        ShipmentDetail shipmentDetail = shipmentDetailService.addShipmentDetails(new ShipmentDetail(
-                shipmentService.getShipmentById(shipmentId, stockId, entityId),
+
+        ShipmentDetail shipmentDetail = shipmentDetailService.addShipmentDetails(
+                shipmentService.getShipmentById(stockId, entityId, shipmentId),
                 shipmentDTORequest.quantity(),
                 shipmentDTORequest.price(),
-                itemsService.getItemByBarcode(shipmentDTORequest.barcode())));
+                shipmentDTORequest.barcode());
         return new ShipmentDetailDTOResponse(
                 shipmentDetail.getId(),
                 shipmentDetail.getQuantity(),

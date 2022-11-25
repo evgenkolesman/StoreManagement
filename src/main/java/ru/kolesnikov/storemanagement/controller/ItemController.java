@@ -44,10 +44,12 @@ public class ItemController {
     public ItemDTOResponse updateItem(@PathVariable("itemId") Long itemId,
                                       @RequestBody
                                       @NonNull ItemDTORequest itemDTORequest) {
+
         Items item = itemService.updateItem(itemId, new Items(itemId,
                 itemDTORequest.name(),
                 itemDTORequest.barcode(),
-                itemDTORequest.price()));
+                itemDTORequest.price(),
+                itemService.getItemById(itemId).getBalance()));
         return new ItemDTOResponse(item.getId(), item.getItemName(), item.getBarcode(), item.getPrice());
 
     }
