@@ -58,6 +58,14 @@ public class ShipmentController {
 
     }
 
+    /**
+     * This would return filled shipment document as JSON to frontend
+     *
+     * @param stockId
+     * @param entityId
+     * @param shipmentId
+     * @return ShipmentDTOResponse.class
+     */
     @GetMapping("/api/v1/stock/{stockId}/legalEntity/{entityId}/shipment/{shipmentId}")
     public ShipmentDTOResponse getShipmentById(@PathVariable("stockId") Long stockId,
                                                @PathVariable("entityId") Long entityId,
