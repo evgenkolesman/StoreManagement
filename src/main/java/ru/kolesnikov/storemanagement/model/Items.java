@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 @Entity
 @Table(name = "item_table")
@@ -30,12 +31,12 @@ public class Items {
 
     @Setter
     @Column(name = "balance")
-    private int balance;
+    private BigInteger balance;
 
     public Items(String itemName, String barcode, BigDecimal price) {
         this.itemName = itemName;
         this.barcode = barcode;
         this.price = price;
-        this.balance = 0;
+        this.balance = BigInteger.ZERO;
     }
 }
